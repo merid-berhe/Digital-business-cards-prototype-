@@ -10,30 +10,31 @@ struct Home: View {
     // MARK: Sample Cards
     @State var cards: [Card] = []
     // MARK: View Properties
-    @State var isBlurEnabled: Bool = false
+    @State var isBlurEnabled: Bool = true
     @State var isRotationEnabled: Bool = true
     var body: some View {
         VStack(spacing: 20){
-            Toggle("Enable Blur", isOn: $isBlurEnabled)
-            Toggle("Turn On Rotation", isOn: $isRotationEnabled)
-                .frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
+            //Toggle("Enable Blur", isOn: $isBlurEnabled)
+            //Toggle("Turn On Rotation", isOn: $isRotationEnabled)
+                //.frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
             
             BoomerangCard(isRotationEnabled: isRotationEnabled, isBlurEnabled: isBlurEnabled, cards: $cards)
-                .frame(height: 220)
+                .frame(height: 620)
                 .padding(.horizontal,15)
+                
         }
         .padding(15)
         .background {
-            Color("BG")
+            Color(.white)
                 .ignoresSafeArea()
         }
-        .preferredColorScheme(.dark)
+        .preferredColorScheme(.light)
         .onAppear(perform: setupCards)
     }
     
     // MARK: Setting Up Card's
     func setupCards(){
-        for index in 1...8{
+        for index in 1...4{
             cards.append(.init(imageName: "Card \(index)"))
         }
         
@@ -98,7 +99,7 @@ struct BoomerangCard: View{
         // MARK: Your Custom View
         Image(card.imageName)
             .resizable()
-            .aspectRatio(contentMode: .fill)
+            .aspectRatio(contentMode: .fit)
             .frame(width: size.width, height: size.height)
             .blur(radius: card.isRotated && isBlurEnabled ? 6.5 : 0)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))

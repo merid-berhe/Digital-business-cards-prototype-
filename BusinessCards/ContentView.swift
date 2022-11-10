@@ -1,8 +1,7 @@
 //
 //  ContentView.swift
-//  BoomerangCards
-//
-//  Created by Balaji on 09/10/22.
+//  Business cards Forum Events demo
+//  Created by Merid 10/11/22.
 //
 
 import SwiftUI

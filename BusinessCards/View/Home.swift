@@ -12,25 +12,36 @@ struct Home: View {
     // MARK: View Properties
     @State var isBlurEnabled: Bool = true
     @State var isRotationEnabled: Bool = true
+    @State private var searchText = ""
+    
     var body: some View {
-        VStack(spacing: 20){
-            //Toggle("Enable Blur", isOn: $isBlurEnabled)
-            //Toggle("Turn On Rotation", isOn: $isRotationEnabled)
+        
+        VStack(spacing: -50){
+                NavigationView {
+                Text((searchText))
+                                .searchable(text: $searchText, prompt: "Search business cards")
+                        }
+                Text("14 business cards")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.system(size: 20))
+                    .bold()
+                //Toggle("Enable Blur", isOn: $isBlurEnabled)
+                //Toggle("Turn On Rotation", isOn: $isRotationEnabled)
                 //.frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
-            
-            BoomerangCard(isRotationEnabled: isRotationEnabled, isBlurEnabled: isBlurEnabled, cards: $cards)
-                .frame(height: 620)
-                .padding(.horizontal,15)
                 
+                BoomerangCard(isRotationEnabled: isRotationEnabled, isBlurEnabled: isBlurEnabled, cards: $cards)
+                    .frame(height: 620)
+                    .padding(.horizontal,15)
+            
+            }
+            .padding(15)
+            .background {
+                Color(.white)
+                    .ignoresSafeArea()
+            }
+            .preferredColorScheme(.light)
+            .onAppear(perform: setupCards)
         }
-        .padding(15)
-        .background {
-            Color(.white)
-                .ignoresSafeArea()
-        }
-        .preferredColorScheme(.light)
-        .onAppear(perform: setupCards)
-    }
     
     // MARK: Setting Up Card's
     func setupCards(){
@@ -53,6 +64,7 @@ struct Home_Previews: PreviewProvider {
         ContentView()
     }
 }
+
 
 // MARK: Boomerang Card View
 struct BoomerangCard: View{

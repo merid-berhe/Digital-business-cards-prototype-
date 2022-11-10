@@ -17,10 +17,13 @@ struct Home: View {
     var body: some View {
         
         VStack(spacing: -50){
+            
                 NavigationView {
                 Text((searchText))
-                                .searchable(text: $searchText, prompt: "Search business cards")
+                    .searchable(text: $searchText, prompt: "Search business cards")
+                    
                         }
+                
                 Text("14 business cards")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.system(size: 20))
@@ -32,6 +35,16 @@ struct Home: View {
                 BoomerangCard(isRotationEnabled: isRotationEnabled, isBlurEnabled: isBlurEnabled, cards: $cards)
                     .frame(height: 620)
                     .padding(.horizontal,15)
+            Button {
+            } label: {
+              Text("Exchange business cards")
+            }
+            .foregroundColor(.white)
+            .padding(16)
+            .background(Color.blue)
+            .cornerRadius(16)
+
+                    
             
             }
             .padding(15)
@@ -41,6 +54,7 @@ struct Home: View {
             }
             .preferredColorScheme(.light)
             .onAppear(perform: setupCards)
+        
         }
     
     // MARK: Setting Up Card's

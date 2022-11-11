@@ -14,6 +14,7 @@ struct Home: View {
     @State var isRotationEnabled: Bool = true
     @State private var searchText = ""
     
+    
     var body: some View {
         
         VStack(spacing: -50){
@@ -28,10 +29,16 @@ struct Home: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(.system(size: 20))
                     .bold()
+                    .overlay(alignment: .trailing) {
+                                    Image(systemName: "list.bullet.circle")
+                                        .offset(x: -20, y: 0)
+                                        .font(.system(size: 20))
+                        }
+    
                 //Toggle("Enable Blur", isOn: $isBlurEnabled)
                 //Toggle("Turn On Rotation", isOn: $isRotationEnabled)
                 //.frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
-                
+            
                 BoomerangCard(isRotationEnabled: isRotationEnabled, isBlurEnabled: isBlurEnabled, cards: $cards)
                     .frame(height: 620)
                     .padding(.horizontal,15)
@@ -43,6 +50,7 @@ struct Home: View {
             .padding(16)
             .background(Color.blue)
             .cornerRadius(16)
+            .frame(maxWidth: .infinity, alignment: .center)
 
                     
             
@@ -215,7 +223,7 @@ struct BoomerangCard: View{
     // Adressing Negative Indexes
     func scaleFor(index value: Int)->Double{
         let index = Double(value - currentIndex)
-        // MARK: I'm Only Showing Three Cards(Your Wish)
+        // MARK: showing only 3 cards in the stack
         if index >= 0{
             if index > 3{
                 return 0.8
@@ -232,7 +240,7 @@ struct BoomerangCard: View{
     
     func offsetFor(index value: Int)->Double{
         let index = Double(value - currentIndex)
-        // MARK: I'm Only Showing Three Cards(Your Wish)
+        // MARK: showing only 3 cards in the stack
         if index >= 0{
             if index > 3{
                 return 30

@@ -50,15 +50,18 @@ struct Home: View {
             BoomerangCard(isRotationEnabled: isRotationEnabled, isBlurEnabled: isBlurEnabled, cards: $cards)
                 .frame(height: 620)
                 .padding(.horizontal,15)
+            
+            //Button
             Button {
             } label: {
                 Text("Exchange business cards")
             }
             .foregroundColor(.white)
-            .padding(16)
+            .padding(.horizontal, 50)
+            .padding(.vertical)
             .background(Color.blue)
             .cornerRadius(16)
-            .frame(maxWidth: .infinity, alignment: .center)
+            .frame(minWidth: 0, maxWidth: .infinity)
             .bold()
             
             //Spacer()
@@ -75,7 +78,7 @@ struct Home: View {
     
     // MARK: Setting Up Card's
     func setupCards(){
-        for index in 1...5{
+        for index in 1...6{
             cards.append(.init(imageName: "Card \(index)"))
         }
         

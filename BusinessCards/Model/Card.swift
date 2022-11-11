@@ -1,7 +1,6 @@
 //
 //  Card.swift
-//  BoomerangCards
-//
+//  Business cards Forum Events prototype
 //  Created by Merid Berhe on 10/10/22.
 //
 

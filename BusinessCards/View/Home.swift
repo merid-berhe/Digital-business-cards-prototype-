@@ -1,6 +1,6 @@
 //
 //  Home.swift
-//  Business cards Forum Events demo
+//  Business cards Forum Events prototype
 //  Created by Merid 10/11/22.
 //
 

@@ -17,57 +17,65 @@ struct Home: View {
     
     var body: some View {
         
-        VStack(spacing: -50){
+        
+        VStack(spacing: -40){
             
-                NavigationView {
+            HStack(alignment: .center) {
+                Text("Item")
+                
+                Spacer()
+                    .padding(-40)
+                    .frame(width: 10)
+                
+            }
+            
+            NavigationView {
                 Text((searchText))
                     .searchable(text: $searchText, prompt: "Search business cards")
-                    
-                        }
                 
-                Text("14 business cards")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(.system(size: 20))
-                    .bold()
-                    .overlay(alignment: .trailing) {
-                                    Image(systemName: "list.bullet.circle")
-                                        .offset(x: -20, y: 0)
-                                        .font(.system(size: 20))
-                        }
-    
-                //Toggle("Enable Blur", isOn: $isBlurEnabled)
-                //Toggle("Turn On Rotation", isOn: $isRotationEnabled)
-                //.frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .top)
+            }
             
-                BoomerangCard(isRotationEnabled: isRotationEnabled, isBlurEnabled: isBlurEnabled, cards: $cards)
-                    .frame(height: 620)
-                    .padding(.horizontal,15)
+            Text("14 Business cards")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.system(size: 20))
+                .padding(15)
+                .bold()
+                .overlay(alignment: .trailing) {
+                    Image(systemName: "list.bullet.circle")
+                        .offset(x: -20, y: 0)
+                        .font(.system(size: 20))
+                        .foregroundColor(.blue)
+                }
+            
+            BoomerangCard(isRotationEnabled: isRotationEnabled, isBlurEnabled: isBlurEnabled, cards: $cards)
+                .frame(height: 620)
+                .padding(.horizontal,15)
             Button {
             } label: {
-              Text("Exchange business cards")
+                Text("Exchange business cards")
             }
             .foregroundColor(.white)
             .padding(16)
             .background(Color.blue)
             .cornerRadius(16)
             .frame(maxWidth: .infinity, alignment: .center)
-
-                    
+            .bold()
             
-            }
-            .padding(15)
-            .background {
-                Color(.white)
-                    .ignoresSafeArea()
-            }
-            .preferredColorScheme(.light)
-            .onAppear(perform: setupCards)
-        
+            //Spacer()
         }
+        .padding(15)
+        .background {
+            Color(.white)
+                .ignoresSafeArea()
+        }
+        .preferredColorScheme(.light)
+        .onAppear(perform: setupCards)
+        
+    }
     
     // MARK: Setting Up Card's
     func setupCards(){
-        for index in 1...4{
+        for index in 1...5{
             cards.append(.init(imageName: "Card \(index)"))
         }
         
@@ -113,7 +121,7 @@ struct BoomerangCard: View{
                         .offset(y: card.extraOffset)
                         .scaleEffect(scaleFor(index: index), anchor: .top)
                         .zIndex(card.zIndex)
-                         // MARK: Moving Only Current Active Card
+                    // MARK: Set interaction only Current Active Card
                         .offset(y: currentIndex == indexOf(card: card) ? offset : 0)
                 }
             }
@@ -151,7 +159,6 @@ struct BoomerangCard: View{
         translation = (translation < 0 ? -translation : 0)
         translation = (currentIndex == (cards.count - 1) ? 0 : translation)
         
-        // MARK: Since Our Card Height = 220
         if translation > 110{
             // MARK: Doing Boomerang Effect And Updating Current Index
             withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0.6)){
